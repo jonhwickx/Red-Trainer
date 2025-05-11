@@ -1,0 +1,30 @@
+case 1: Option1: print2("<orange>Destroyed Bridges</orange>: <green>ON", 3000); UndeadBridgez = 1; break;
+
+BHorse0 = !BHorse0; if (BHorse0 > 1294 || BHorse0 == -1)
+
+
+}
+void FreezePlayerV1(int SlotID)
+{
+	if (IS_SLOT_VALID(NetSlotId))
+	{
+		DESTROY_ACTOR(FreezePed0);
+		DESTROY_ACTOR(FreezePed1);
+		FreezePed0 = GET_MOST_RECENT_MOUNT(GET_SLOT_ACTOR(FreezePed1));
+		FreezePed0 = CreateActor(RAND_INT_RANGE(3, 324), self);
+		FreezePed1 = CreateActor(RAND_INT_RANGE(3, 324), self);
+		NET_REQUEST_OBJECT(FreezePed1);
+		TURN_ACTOR_INTO_ZOMBIE(FreezePed1, RAND_INT_RANGE(1204, 1221));
+		SET_ACTOR_RIDEABLE(FreezePed1, 1);
+		ANIMAL_ACTOR_SET_DOMESTICATION(FreezePed1, 0);
+		ACTOR_MOUNT_ACTOR(FreezePed0, FreezePed1);
+		AI_IGNORE_ACTOR(FreezePed0);
+		AI_IGNORE_ACTOR(FreezePed1);
+		GET_SLOT_POSITION(SlotID, &ve22);
+		TELEPORT_ACTOR(FreezePed1, &ve22, 1, 1, 1);
+		ACTOR_MOUNT_ACTOR(FreezePed0, FreezePed1);
+		TELEPORT_ACTOR(FreezePed1, &ve22, 1, 1, 1);
+		ACTOR_MOUNT_ACTOR(FreezePed0, FreezePed1);
+		WAIT(1200);
+		DESTROY_ACTOR(FreezePed0); DESTROY_ACTOR(FreezePed1);
+	}

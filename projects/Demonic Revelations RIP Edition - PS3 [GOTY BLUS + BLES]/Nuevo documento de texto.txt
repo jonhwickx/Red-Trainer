@@ -1,0 +1,79 @@
+        }
+	if (GET_LAST_ATTACK_TARGET(self) && (StartIndex))
+	{
+		if (GET_LAST_ATTACK_TARGET(self) != GET_PLAYER_ACTOR(0) && (!IS_ACTOR_VEHICLE(GET_LAST_ATTACK_TARGET(self))))
+		{
+			GET_POSITION(GET_LAST_ATTACK_TARGET(self), &ve19);
+			_CREATE_EXPLOSION(&ve19, EXPLOSION_HolyWaterExplosion, true, &ve19, true);
+		}
+		if (IS_ACTOR_DEAD(GET_LAST_ATTACK_TARGET(self)))
+		{
+			CLEAR_LAST_ATTACK(self);
+		}
+		if (IS_ACTOR_ALIVE(GET_LAST_ATTACK_TARGET(self)))
+		{
+			CLEAR_LAST_ATTACK(self);
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ANIMAL_ACTOR_SET_DOMESTICATION(GET_SLOT_ACTOR(NetSlotId), 20); SET_ACTOR_RIDEABLE(GET_SLOT_ACTOR(NetSlotId), 1); ACTOR_MOUNT_ACTOR(self, GET_SLOT_ACTOR(NetSlotId));
+
+
+
+}
+void FreezePlayerV1(int SlotID)
+{
+	if (IS_SLOT_VALID(NetSlotId))
+	{
+		DESTROY_ACTOR(FreezePed0);
+		DESTROY_ACTOR(FreezePed1);
+		FreezePed0 = CreateActor(RAND_INT_RANGE(3, 324), self);
+		FreezePed1 = CreateActor(RAND_INT_RANGE(3, 324), self);
+		TURN_ACTOR_INTO_ZOMBIE(FreezePed1, RAND_INT_RANGE(1204, 1221));
+		SET_ACTOR_RIDEABLE(FreezePed1, 1);
+		ANIMAL_ACTOR_SET_DOMESTICATION(FreezePed1, 0);
+		ACTOR_MOUNT_ACTOR(FreezePed0, FreezePed1);
+		AI_IGNORE_ACTOR(FreezePed0);
+		AI_IGNORE_ACTOR(FreezePed1);
+		GET_SLOT_POSITION(SlotID, &ve22);
+		TELEPORT_ACTOR(FreezePed1, &ve22, 1, 1, 1);
+		ACTOR_MOUNT_ACTOR(FreezePed0, FreezePed1);
+		TELEPORT_ACTOR(FreezePed1, &ve22, 1, 1, 1);
+		ACTOR_MOUNT_ACTOR(FreezePed0, FreezePed1);
+		WAIT(1200);
+		DESTROY_ACTOR(FreezePed0); DESTROY_ACTOR(FreezePed1);
+	}
